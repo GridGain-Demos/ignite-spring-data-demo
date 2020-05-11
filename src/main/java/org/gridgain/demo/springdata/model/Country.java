@@ -18,8 +18,6 @@
 package org.gridgain.demo.springdata.model;
 
 public class Country {
-    private String code;
-
     private String name;
 
     private String continent;
@@ -32,19 +30,10 @@ public class Country {
     }
 
     public Country(String code, String name, String continent, String region, int population) {
-        this.code = code;
         this.name = name;
         this.continent = continent;
         this.region = region;
         this.population = population;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {

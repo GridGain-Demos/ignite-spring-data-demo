@@ -15,22 +15,38 @@
  *  limitations under the License.
  */
 
-package org.gridgain.demo.springdata.model;
+package org.gridgain.demo.springdata.model.dto;
 
-public class City {
+import org.gridgain.demo.springdata.model.Country;
+
+public class CountryDTO {
+    private String code;
+
     private String name;
 
-    private String district;
+    private String continent;
+
+    private String region;
 
     private int population;
 
-    public City() {
+    public CountryDTO(String key, Country value) {
+        this.code = key;
+        this.name = value.getName();
+        this.continent = value.getContinent();
+        this.region = value.getRegion();
+        this.population = value.getPopulation();
     }
 
-    public City(String name, String district, int population) {
-        this.name = name;
-        this.district = district;
-        this.population = population;
+    public CountryDTO() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -41,12 +57,20 @@ public class City {
         this.name = name;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getContinent() {
+        return continent;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public int getPopulation() {

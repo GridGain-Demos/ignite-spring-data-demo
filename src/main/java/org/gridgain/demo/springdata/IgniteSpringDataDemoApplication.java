@@ -9,5 +9,4 @@ public class IgniteSpringDataDemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IgniteSpringDataDemoApplication.class, args);
 	}
-
 }

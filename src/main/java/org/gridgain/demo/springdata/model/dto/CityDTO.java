@@ -15,22 +15,47 @@
  *  limitations under the License.
  */
 
-package org.gridgain.demo.springdata.model.dao;
+package org.gridgain.demo.springdata.model.dto;
 
-public class CityValue {
+import org.gridgain.demo.springdata.model.City;
+import org.gridgain.demo.springdata.model.CityKey;
+
+public class CityDTO {
+    private int id;
+
+    private String countryCode;
+
     private String name;
 
     private String district;
 
     private int population;
 
-    public CityValue() {
+    public CityDTO(CityKey key, City value) {
+        this.id = key.getId();
+        this.countryCode = key.getCountryCode();
+        this.name = value.getName();
+        this.district = value.getDistrict();
+        this.population = value.getPopulation();
     }
 
-    public CityValue(String name, String district, int population) {
-        this.name = name;
-        this.district = district;
-        this.population = population;
+    public CityDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getName() {

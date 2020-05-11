@@ -15,17 +15,30 @@
  *  limitations under the License.
  */
 
-package org.gridgain.demo.springdata.model.dao;
+package org.gridgain.demo.springdata.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 
 public class CityKey implements Serializable {
-    private int id;
+    private int ID;
 
     @AffinityKeyMapped
-    private String countryCode;
+    private String COUNTRYCODE;
+
+    public CityKey(int id, String countryCode) {
+        this.ID = id;
+        this.COUNTRYCODE = countryCode;
+    }
+
+    public int getId() {
+        return ID;
+    }
+
+    public String getCountryCode() {
+        return COUNTRYCODE;
+    }
 
     @Override public boolean equals(Object o) {
         if (this == o)
@@ -33,11 +46,11 @@ public class CityKey implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         CityKey key = (CityKey)o;
-        return id == key.id &&
-            countryCode.equals(key.countryCode);
+        return ID == key.ID &&
+            COUNTRYCODE.equals(key.COUNTRYCODE);
     }
 
     @Override public int hashCode() {
-        return Objects.hash(id, countryCode);
+        return Objects.hash(ID, COUNTRYCODE);
     }
 }

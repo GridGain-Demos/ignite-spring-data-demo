@@ -30,13 +30,28 @@ change Spring's port number - `server.port=9000`
 * Start 2-nodes cluster.
 * Edit the world.sql file:
 - Set Country table's VALUE_TYPE to `VALUE_TYPE=org.gridgain.demo.springdata.model.Country"`
-- Update City table `KEY_TYPE=org.gridgain.demo.springdata.model.dao.CityKey` and `VALUE_TYPE=org.gridgain.demo.springdata.model.dao.CityValue`
+- Update City table `KEY_TYPE=org.gridgain.demo.springdata.model.CityKey` and `VALUE_TYPE=org.gridgain.demo.springdata.model.City`
 * Create the database with SQLLine.
 `./sqlline.sh -u jdbc:ignite:thin://127.0.0.1/`
 `!run ../examples/sql/world.sql`
 
 ## Create Models for Cities and Countries
 
+Create Ignite specific domain objects as well as DTO (Data Transfer Objects).
+
 ## Create IgniteRepositories
 
-test - `http://localhost:9000/api/cities?population=1000000&country=USA`
+Working with Countries repo:
+* Create a method with query auto-generation that returns most populated countries: `http://localhost:9000/api/countries?population=120000000`
+
+* Create a method that uses Ignite SQL directly (Spring Data named queries) to get most populated countries: `http://localhost:9000/api/countries/mostPopulated?limit=10`
+
+Working with Cities:
+* Create an auto-generated method that returns cities with specific population: `http://localhost:9000/api/cities?population=8000000`
+* Create a named method that joins tables and returns most populated cities: `http://localhost:9000/api/cities/mostPopulated?limit=10`
+* Create a method that updates population using Spring data (note that we have to use the named query to find a city by id
+because Ignite Spring Data integration doesn't introspect the fields of the keys):
+`curl -X PUT -H 'Content-Type: application/json' -d '{"population":5000}' http://localhost:9000/api/cities/3507`
+
+Say, that "UPDATE" or "DELETE" can be used with the named queries for the cases when you just need to update a record or
+records and don't need to return the objects via the REST API.
