@@ -29,7 +29,7 @@ public class Country {
     public Country() {
     }
 
-    public Country(String code, String name, String continent, String region, int population) {
+    public Country(String name, String continent, String region, int population) {
         this.name = name;
         this.continent = continent;
         this.region = region;
@@ -40,31 +40,15 @@ public class Country {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getContinent() {
         return continent;
-    }
-
-    public void setContinent(String continent) {
-        this.continent = continent;
     }
 
     public String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
     public int getPopulation() {
         return population;
-    }
-
-    public void setPopulation(int population) {
-        this.population = population;
     }
 }

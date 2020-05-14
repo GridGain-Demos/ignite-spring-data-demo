@@ -15,70 +15,44 @@
  *  limitations under the License.
  */
 
-package org.gridgain.demo.springdata.model.dto;
+package org.gridgain.demo.springdata.model;
 
-import org.gridgain.demo.springdata.model.City;
-import org.gridgain.demo.springdata.model.CityKey;
-
-public class CityDTO {
-    private int id;
-
-    private String countryCode;
+public class CountryDTO {
+    private String code;
 
     private String name;
 
-    private String district;
+    private String continent;
+
+    private String region;
 
     private int population;
 
-    public CityDTO(CityKey key, City value) {
-        this.id = key.getId();
-        this.countryCode = key.getCountryCode();
+    public CountryDTO(String key, Country value) {
+        this.code = key;
         this.name = value.getName();
-        this.district = value.getDistrict();
+        this.continent = value.getContinent();
+        this.region = value.getRegion();
         this.population = value.getPopulation();
     }
 
-    public CityDTO() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public String getCode() {
+        return code;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getContinent() {
+        return continent;
     }
 
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
+    public String getRegion() {
+        return region;
     }
 
     public int getPopulation() {
         return population;
-    }
-
-    public void setPopulation(int population) {
-        this.population = population;
     }
 }

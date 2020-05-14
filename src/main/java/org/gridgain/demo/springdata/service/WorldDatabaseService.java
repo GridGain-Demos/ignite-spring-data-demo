@@ -25,8 +25,8 @@ import org.gridgain.demo.springdata.dao.CountryRepository;
 import org.gridgain.demo.springdata.model.City;
 import org.gridgain.demo.springdata.model.CityKey;
 import org.gridgain.demo.springdata.model.Country;
-import org.gridgain.demo.springdata.model.dto.CityDTO;
-import org.gridgain.demo.springdata.model.dto.CountryDTO;
+import org.gridgain.demo.springdata.model.CityDTO;
+import org.gridgain.demo.springdata.model.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,34 +36,22 @@ public class WorldDatabaseService {
 
     @Autowired CityRepository cityDao;
 
-    public List<CountryDTO> getCountries(int population) {
-        List<Cache.Entry<String, Country>> entries =
-            countryDao.findByPopulationGreaterThanEqualOrderByPopulationDesc(population);
+    public List<CountryDTO> getCountriesByPopulation(int population) {
+        List<CountryDTO> countries = new ArrayList<>();
 
-        return convertCountryToDTO(entries);
+        for (Cache.Entry<String, Country> entry: countryDao.findByPopulationGreaterThanEqualOrderByPopulationDesc(population))
+            countries.add(new CountryDTO(entry.getKey(), entry.getValue()));
+
+        return countries;
     }
 
-    public List<CityDTO> getCities(int population) {
-        List<Cache.Entry<CityKey,City>> entries = cityDao.findAllByPopulationGreaterThanEqualOrderByPopulation(population);
+    public List<CityDTO> getCitiesByPopulation(int population) {
+        List<CityDTO> cities = new ArrayList<>();
 
-        return convertCityToDTO(entries);
-    }
+        for (Cache.Entry<CityKey, City> entry: cityDao.findAllByPopulationGreaterThanEqualOrderByPopulation(population))
+            cities.add(new CityDTO(entry.getKey(), entry.getValue()));
 
-    public List<CountryDTO> getMostPopulatedCountries(Integer limit) {
-        List<List<?>> entries = countryDao.findMostPopulatedCountries(limit == null ? 5 : limit);
-
-        List<CountryDTO> result = new ArrayList<>(entries.size());
-
-        for (List<?> row: entries) {
-            CountryDTO country = new CountryDTO();
-
-            country.setName((String)row.get(0));
-            country.setPopulation((Integer)row.get(1));
-
-            result.add(country);
-        }
-
-        return result;
+        return cities;
     }
 
     public List<List<?>> getMostPopulatedCities(Integer limit) {
@@ -80,24 +68,5 @@ public class WorldDatabaseService {
         cityDao.save(entry.getKey(), entry.getValue());
 
         return new CityDTO(entry.getKey(), entry.getValue());
-    }
-
-
-    private List<CityDTO> convertCityToDTO(List<Cache.Entry<CityKey,City>> entries) {
-        List<CityDTO> cities = new ArrayList<>(entries.size());
-
-        for (Cache.Entry<CityKey, City> entry: entries)
-            cities.add(new CityDTO(entry.getKey(), entry.getValue()));
-
-        return cities;
-    }
-
-    private List<CountryDTO> convertCountryToDTO(List<Cache.Entry<String, Country>> entries) {
-        List<CountryDTO> countries = new ArrayList<>(entries.size());
-
-        for (Cache.Entry<String, Country> entry: entries)
-            countries.add(new CountryDTO(entry.getKey(), entry.getValue()));
-
-        return countries;
     }
 }

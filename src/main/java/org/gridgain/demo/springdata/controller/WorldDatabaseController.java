@@ -18,10 +18,8 @@
 package org.gridgain.demo.springdata.controller;
 
 import java.util.List;
-import javax.cache.Cache;
-import org.gridgain.demo.springdata.model.Country;
-import org.gridgain.demo.springdata.model.dto.CityDTO;
-import org.gridgain.demo.springdata.model.dto.CountryDTO;
+import org.gridgain.demo.springdata.model.CityDTO;
+import org.gridgain.demo.springdata.model.CountryDTO;
 import org.gridgain.demo.springdata.service.WorldDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,17 +35,12 @@ public class WorldDatabaseController {
 
     @GetMapping("/api/countries")
     public List<CountryDTO> getCountriesByPopulation(@RequestParam (value = "population", required = true) int population) {
-        return service.getCountries(population);
-    }
-
-    @GetMapping("/api/countries/mostPopulated")
-    public List<CountryDTO> getMostPopulatedCountries(@RequestParam (value = "limit", required = false) Integer limit) {
-        return service.getMostPopulatedCountries(limit);
+        return service.getCountriesByPopulation(population);
     }
 
     @GetMapping("/api/cities")
     public List<CityDTO> getCitiesByPopulation(@RequestParam (value = "population", required = true) int population) {
-        return service.getCities(population);
+        return service.getCitiesByPopulation(population);
     }
 
     @GetMapping("/api/cities/mostPopulated")

@@ -11,6 +11,17 @@ Step-by-step plan:
 * REST processors of spring boot (https://medium.com/swlh/spring-cache-with-apache-ignite-def103cae35)
 Note, the readers have to build the project from scratch while this github repo is a complete solution for reference and has a fewer instructions (like start the cluster and run this-that).
 
+## Start Ignite Cluster and Create Sample Database
+
+* Download Ignite 2.8.0
+* Start 2-nodes cluster.
+* Edit the world.sql file:
+- Set Country table's VALUE_TYPE to `VALUE_TYPE=org.gridgain.demo.springdata.model.Country"`
+- Update City table `KEY_TYPE=org.gridgain.demo.springdata.model.CityKey` and `VALUE_TYPE=org.gridgain.demo.springdata.model.City`
+* Create the database with SQLLine.
+`./sqlline.sh -u jdbc:ignite:thin://127.0.0.1/`
+`!run ../examples/sql/world.sql`
+
 ## Creating Project With Spring
 
 Init the project with parameters shown on the picture below (https://start.spring.io):
@@ -24,16 +35,6 @@ Set H2 version to `<h2.version>1.4.197</h2.version>`
 
 change Spring's port number - `server.port=9000`
 
-## Start Ignite Cluster and Create Sample Database
-
-* Download Ignite 2.8.0
-* Start 2-nodes cluster.
-* Edit the world.sql file:
-- Set Country table's VALUE_TYPE to `VALUE_TYPE=org.gridgain.demo.springdata.model.Country"`
-- Update City table `KEY_TYPE=org.gridgain.demo.springdata.model.CityKey` and `VALUE_TYPE=org.gridgain.demo.springdata.model.City`
-* Create the database with SQLLine.
-`./sqlline.sh -u jdbc:ignite:thin://127.0.0.1/`
-`!run ../examples/sql/world.sql`
 
 ## Create Models for Cities and Countries
 
@@ -42,9 +43,7 @@ Create Ignite specific domain objects as well as DTO (Data Transfer Objects).
 ## Create IgniteRepositories
 
 Working with Countries repo:
-* Create a method with query auto-generation that returns most populated countries: `http://localhost:9000/api/countries?population=120000000`
-
-* Create a method that uses Ignite SQL directly (Spring Data named queries) to get most populated countries: `http://localhost:9000/api/countries/mostPopulated?limit=10`
+* Create a method with query auto-generation that returns countries with population equal or exceeding a passed parameter: `http://localhost:9000/api/countries?population=120000000`
 
 Working with Cities:
 * Create an auto-generated method that returns cities with specific population: `http://localhost:9000/api/cities?population=8000000`
