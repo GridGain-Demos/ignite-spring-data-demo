@@ -28,6 +28,9 @@ public class CountryDTO {
 
     private int population;
 
+    public CountryDTO() {
+    }
+
     public CountryDTO(String key, Country value) {
         this.code = key;
         this.name = value.getName();

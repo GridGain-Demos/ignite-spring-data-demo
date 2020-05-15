@@ -28,6 +28,9 @@ public class CityDTO {
 
     private int population;
 
+    public CityDTO() {
+    }
+
     public CityDTO(CityKey key, City value) {
         this.id = key.getId();
         this.countryCode = key.getCountryCode();

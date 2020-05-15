@@ -24,15 +24,6 @@ public class City {
 
     private int population;
 
-    public City() {
-    }
-
-    public City(String name, String district, int population) {
-        this.name = name;
-        this.district = district;
-        this.population = population;
-    }
-
     public String getName() {
         return name;
     }
