@@ -18,21 +18,24 @@
 package org.gridgain.demo.springdata;
 
 import org.apache.ignite.Ignite;
-import org.apache.ignite.Ignition;
 import org.apache.ignite.configuration.IgniteConfiguration;
-import org.apache.ignite.springdata22.repository.config.EnableIgniteRepositories;
+import org.apache.ignite.springframework.boot.autoconfigure.IgniteConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableIgniteRepositories
 public class DemoConfig {
+    @Bean(name = "igniteInstance")
+    public Ignite igniteInstance(Ignite ignite) {
+        return ignite;
+    }
+
     @Bean
-    public Ignite igniteInstance() {
-        IgniteConfiguration cfg = new IgniteConfiguration();
+    public IgniteConfigurer configurer() {
+        return igniteConfiguration -> {
+            IgniteConfiguration cfg = new IgniteConfiguration();
 
-        cfg.setClientMode(true);
-
-        return Ignition.start(cfg);
+            cfg.setClientMode(true);
+        };
     }
 }
