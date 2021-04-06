@@ -33,9 +33,7 @@ public class DemoConfig {
     @Bean
     public IgniteConfigurer configurer() {
         return igniteConfiguration -> {
-            IgniteConfiguration cfg = new IgniteConfiguration();
-
-            cfg.setClientMode(true);
+            igniteConfiguration.setClientMode(true);
         };
     }
 }
