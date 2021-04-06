@@ -18,7 +18,6 @@
 package org.gridgain.demo.springdata;
 
 import org.apache.ignite.Ignite;
-import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.springframework.boot.autoconfigure.IgniteConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
