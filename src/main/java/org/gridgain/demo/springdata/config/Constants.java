@@ -14,17 +14,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.gridgain.demo.springdata;
 
-import org.apache.ignite.springdata.repository.config.EnableIgniteRepositories;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package org.gridgain.demo.springdata.config;
 
-@SpringBootApplication
-@EnableIgniteRepositories
-public class IgniteSpringDataDemoApplication {
+public final class Constants {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IgniteSpringDataDemoApplication.class, args);
-	}
+    public static final String COUNTRY_CACHE = "Country";
+    public static final String CITY_CACHE = "City";
+
 }

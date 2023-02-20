@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package org.gridgain.demo.springdata;
+package org.gridgain.demo.springdata.config;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.springframework.boot.autoconfigure.IgniteConfigurer;

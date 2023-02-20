@@ -1,0 +1,7 @@
+.idea/
+*.iml
+
+.mvn/wrapper/maven-wrapper.jar
+target
+
+ignite/

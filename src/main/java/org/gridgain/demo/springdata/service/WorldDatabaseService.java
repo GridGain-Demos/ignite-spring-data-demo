@@ -55,9 +55,7 @@ public class WorldDatabaseService {
     }
 
     public List<List<?>> getMostPopulatedCities(Integer limit) {
-        List<List<?>> entries = cityDao.findMostPopulatedCities(limit == null ? 5 : limit);
-
-        return entries;
+        return cityDao.findMostPopulatedCities(limit == null ? 5 : limit);
     }
 
     public CityDTO updateCityPopulation(int cityId, int population) {

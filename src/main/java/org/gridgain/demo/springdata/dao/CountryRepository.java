@@ -19,12 +19,15 @@ package org.gridgain.demo.springdata.dao;
 
 import java.util.List;
 import javax.cache.Cache;
-import org.apache.ignite.springdata22.repository.IgniteRepository;
-import org.apache.ignite.springdata22.repository.config.RepositoryConfig;
+import org.apache.ignite.springdata.repository.IgniteRepository;
+import org.apache.ignite.springdata.repository.config.RepositoryConfig;
 import org.gridgain.demo.springdata.model.Country;
 import org.springframework.stereotype.Repository;
 
-@RepositoryConfig (cacheName = "Country")
+import static org.gridgain.demo.springdata.config.Constants.COUNTRY_CACHE;
+
+
+@RepositoryConfig(cacheName = COUNTRY_CACHE)
 @Repository
 public interface CountryRepository extends IgniteRepository<Country, String> {
 
